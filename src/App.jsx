@@ -463,12 +463,7 @@ export default function App() {
           {loginErr && <div style={{ fontSize: 12, color: SF_YELLOW, background: "rgba(255,215,0,0.08)", padding: "8px 10px", borderRadius: 6 }}>{loginErr}</div>}
           <button onClick={doLogin} style={{ ...yellowBtn(), padding: "10px", fontSize: 14, marginTop: 4 }}>Entrar</button>
         </div>
-        <div style={{ marginTop: 20, padding: "12px", background: "rgba(255,255,255,0.04)", borderRadius: 8, fontSize: 11, color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>
-          
-          <div>Estagiário: <span style={{ color: "#fff" }}>ana.lima / 123</span></div>
-          <div>Líder: <span style={{ color: "#fff" }}>carlos.mendes / lider123</span></div>
-          <div>Admin: <span style={{ color: "#fff" }}>admin / admin123</span></div>
-        </div>
+        
       </div>
     </div>
   );
