@@ -462,6 +462,15 @@ export default function App() {
     setView("home"); loadData();
   };
 
+  // ── LOGIN ──
+  if (!user) return (
+    <div style={{ minHeight: 500, background: SF_BLACK, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem 1rem", fontFamily: "Arial, sans-serif" }}>
+      <div style={{ marginBottom: 32 }}><SmartFitLogo size={40} /></div>
+      <div style={{ width: "100%", maxWidth: 360, background: SF_DARK_GRAY, borderRadius: 16, padding: "2rem", border: "1px solid rgba(255,215,0,0.2)" }}>
+        <div style={{ fontSize: 11, color: SF_YELLOW, fontWeight: 700, letterSpacing: 2, marginBottom: 4 }}>PROGRAMA DE ESTÁGIO</div>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#fff", marginBottom: 24 }}>Acesse sua conta</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div>
             <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginBottom: 4, fontWeight: 700, letterSpacing: 1 }}>LOGIN</div>
             <input value={loginInput.login} onChange={e=>setLoginInput({...loginInput,login:e.target.value})} onKeyDown={e=>e.key==="Enter"&&doLogin()} placeholder="seu.login" style={darkInp} />
           </div>
