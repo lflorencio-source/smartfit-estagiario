@@ -44,19 +44,19 @@ const initialEstagiarios = [
 ];
 
 const colorFor = (i) => [{ bg: "#2a3a2a", color: SF_YELLOW }, { bg: "#1a2a3a", color: "#60BFFF" }, { bg: "#2a1a2a", color: "#FF80C0" }, { bg: "#2a2a1a", color: SF_YELLOW }][i.charCodeAt(0) % 4];
-const Stars = ({ nota, onChange }: any) => <span style={{ display: "inline-flex", gap: 2 }}>{[1,2,3,4,5].map(i => <span key={i} onClick={() => onChange && onChange(i)} style={{ fontSize: 18, cursor: onChange ? "pointer" : "default", color: i <= nota ? SF_YELLOW : "#555" }}>★</span>)}</span>;
-const RadialKPI = ({ label, valor, meta, color }: any) => { const pct = Math.min(1, valor / meta); const r = 34, cx = 42, cy = 42, sw = 7, circ = 2 * Math.PI * r; return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}><svg width={84} height={84}><circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={`${pct * circ} ${circ}`} strokeLinecap="round" transform={`rotate(-90 ${cx} ${cy})`} /><text x={cx} y={cy - 5} textAnchor="middle" fontSize={14} fontWeight={700} fill="#fff">{valor}</text><text x={cx} y={cy + 10} textAnchor="middle" fontSize={10} fill="rgba(255,255,255,0.5)">/{meta}</text></svg><span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", textAlign: "center", maxWidth: 76 }}>{label}</span></div>; };
+const Stars = ({ nota, onChange }) => <span style={{ display: "inline-flex", gap: 2 }}>{[1,2,3,4,5].map(i => <span key={i} onClick={() => onChange && onChange(i)} style={{ fontSize: 18, cursor: onChange ? "pointer" : "default", color: i <= nota ? SF_YELLOW : "#555" }}>★</span>)}</span>;
+const RadialKPI = ({ label, valor, meta, color }) => { const pct = Math.min(1, valor / meta); const r = 34, cx = 42, cy = 42, sw = 7, circ = 2 * Math.PI * r; return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}><svg width={84} height={84}><circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={`${pct * circ} ${circ}`} strokeLinecap="round" transform={`rotate(-90 ${cx} ${cy})`} /><text x={cx} y={cy - 5} textAnchor="middle" fontSize={14} fontWeight={700} fill="#fff">{valor}</text><text x={cx} y={cy + 10} textAnchor="middle" fontSize={10} fill="rgba(255,255,255,0.5)">/{meta}</text></svg><span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", textAlign: "center", maxWidth: 76 }}>{label}</span></div>; };
 
 const useIsMobile = () => { const [m, setM] = useState(window.innerWidth <= 600); useEffect(() => { const fn = () => setM(window.innerWidth <= 600); window.addEventListener("resize", fn); return () => window.removeEventListener("resize", fn); }, []); return m; };
 
-const sf: any = { color: "#fff", fontFamily: "Arial, sans-serif" };
-const darkCard = (s: any = {}) => ({ background: SF_DARK_GRAY, border: "0.5px solid rgba(255,215,0,0.15)", borderRadius: 12, padding: "1rem 1.25rem", ...s });
-const yellowBtn = (s: any = {}) => ({ background: SF_YELLOW, color: SF_BLACK, border: "none", borderRadius: 8, padding: "8px 18px", fontSize: 13, fontWeight: 700, cursor: "pointer", ...s });
-const ghostBtn = (s: any = {}) => ({ background: "transparent", color: "#fff", border: "0.5px solid rgba(255,255,255,0.2)", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", ...s });
-const redBtn = (s: any = {}) => ({ background: "rgba(255,80,80,0.15)", color: "#ff6b6b", border: "0.5px solid rgba(255,80,80,0.3)", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", ...s });
-const darkInp: any = { width: "100%", fontSize: 13, padding: "9px 12px", borderRadius: 8, border: "0.5px solid rgba(255,215,0,0.3)", background: "rgba(255,255,255,0.06)", color: "#fff", boxSizing: "border-box" };
+const sf = { color: "#fff", fontFamily: "Arial, sans-serif" };
+const darkCard = (s = {}) => ({ background: SF_DARK_GRAY, border: "0.5px solid rgba(255,215,0,0.15)", borderRadius: 12, padding: "1rem 1.25rem", ...s });
+const yellowBtn = (s = {}) => ({ background: SF_YELLOW, color: SF_BLACK, border: "none", borderRadius: 8, padding: "8px 18px", fontSize: 13, fontWeight: 700, cursor: "pointer", ...s });
+const ghostBtn = (s = {}) => ({ background: "transparent", color: "#fff", border: "0.5px solid rgba(255,255,255,0.2)", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", ...s });
+const redBtn = (s = {}) => ({ background: "rgba(255,80,80,0.15)", color: "#ff6b6b", border: "0.5px solid rgba(255,80,80,0.3)", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", ...s });
+const darkInp = { width: "100%", fontSize: 13, padding: "9px 12px", borderRadius: 8, border: "0.5px solid rgba(255,215,0,0.3)", background: "rgba(255,255,255,0.06)", color: "#fff", boxSizing: "border-box" };
 
-const ConfirmModal = ({ msg, onConfirm, onCancel }: any) => (
+const ConfirmModal = ({ msg, onConfirm, onCancel }) => (
   <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
     <div style={{ background: SF_DARK_GRAY, border: "1px solid rgba(255,80,80,0.3)", borderRadius: 12, padding: "24px", maxWidth: 340, width: "100%", textAlign: "center" }}>
       <div style={{ fontSize: 32, marginBottom: 12 }}>⚠️</div>
@@ -69,21 +69,19 @@ const ConfirmModal = ({ msg, onConfirm, onCancel }: any) => (
   </div>
 );
 
-const GerenciarUnidades = ({ unidades, setUnidades, ests, onClose }: any) => {
+const GerenciarUnidades = ({ unidades, setUnidades, ests, onClose }) => {
   const [formNova, setFormNova] = useState({ nome: "", cidade: "São Paulo" });
-  const [editando, setEditando] = useState<number | null>(null);
+  const [editando, setEditando] = useState(null);
   const [formEdit, setFormEdit] = useState({ nome: "", cidade: "" });
-  const [confirmDel, setConfirmDel] = useState<any>(null);
+  const [confirmDel, setConfirmDel] = useState(null);
   const isMobile = useIsMobile();
-
-  const salvarNova = () => { if (!formNova.nome.trim()) return; setUnidades((p: any) => [...p, { id: Date.now(), nome: formNova.nome.trim(), cidade: formNova.cidade }]); setFormNova({ nome: "", cidade: "São Paulo" }); };
-  const iniciarEdit = (u: any) => { setEditando(u.id); setFormEdit({ nome: u.nome, cidade: u.cidade }); };
-  const salvarEdit = (id: number) => { if (!formEdit.nome.trim()) return; setUnidades((p: any) => p.map((u: any) => u.id === id ? { ...u, nome: formEdit.nome.trim(), cidade: formEdit.cidade } : u)); setEditando(null); };
-  const excluirUnidade = (u: any) => { const v = ests.filter((e: any) => e.unidade === u.nome).length; if (v > 0) { setConfirmDel({ id: u.id, nome: u.nome, vinculados: v }); } else { setUnidades((p: any) => p.filter((x: any) => x.id !== u.id)); } };
-
+  const salvarNova = () => { if (!formNova.nome.trim()) return; setUnidades(p => [...p, { id: Date.now(), nome: formNova.nome.trim(), cidade: formNova.cidade }]); setFormNova({ nome: "", cidade: "São Paulo" }); };
+  const iniciarEdit = (u) => { setEditando(u.id); setFormEdit({ nome: u.nome, cidade: u.cidade }); };
+  const salvarEdit = (id) => { if (!formEdit.nome.trim()) return; setUnidades(p => p.map(u => u.id === id ? { ...u, nome: formEdit.nome.trim(), cidade: formEdit.cidade } : u)); setEditando(null); };
+  const excluirUnidade = (u) => { const v = ests.filter(e => e.unidade === u.nome).length; if (v > 0) { setConfirmDel({ id: u.id, nome: u.nome, vinculados: v }); } else { setUnidades(p => p.filter(x => x.id !== u.id)); } };
   return (
     <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", overflow: "auto" }}>
-      {confirmDel && <ConfirmModal msg={`A unidade "${confirmDel.nome}" tem ${confirmDel.vinculados} estagiário(s) vinculado(s). Excluir mesmo assim?`} onConfirm={() => { setUnidades((p: any) => p.filter((x: any) => x.id !== confirmDel.id)); setConfirmDel(null); }} onCancel={() => setConfirmDel(null)} />}
+      {confirmDel && <ConfirmModal msg={`A unidade "${confirmDel.nome}" tem ${confirmDel.vinculados} estagiário(s) vinculado(s). Excluir mesmo assim?`} onConfirm={() => { setUnidades(p => p.filter(x => x.id !== confirmDel.id)); setConfirmDel(null); }} onCancel={() => setConfirmDel(null)} />}
       <div style={{ position: "sticky", top: 0, zIndex: 10, background: SF_BLACK, borderBottom: `2px solid ${SF_YELLOW}`, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "10px 12px" : "12px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}><SmartFitLogo size={isMobile ? 18 : 22} /><span style={{ color: SF_YELLOW, fontSize: isMobile ? 12 : 14, fontWeight: 700 }}>Gerenciar Unidades</span></div>
         <button onClick={onClose} style={ghostBtn({ fontSize: 12 })}>✕ Fechar</button>
@@ -91,19 +89,19 @@ const GerenciarUnidades = ({ unidades, setUnidades, ests, onClose }: any) => {
       <div style={{ width: "100%", maxWidth: 560, padding: isMobile ? "16px 12px" : "24px 16px" }}>
         <div style={darkCard({ marginBottom: 20 })}>
           <div style={{ fontSize: 13, fontWeight: 700, color: SF_YELLOW, marginBottom: 12 }}>+ Nova unidade</div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as any }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             <input value={formNova.nome} onChange={e => setFormNova({ ...formNova, nome: e.target.value })} placeholder="Nome da unidade" style={{ ...darkInp, flex: 2, minWidth: 140 }} />
             <input value={formNova.cidade} onChange={e => setFormNova({ ...formNova, cidade: e.target.value })} placeholder="Cidade" style={{ ...darkInp, flex: 1, minWidth: 100 }} />
             <button onClick={salvarNova} style={yellowBtn({ flexShrink: 0 })}>Cadastrar</button>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" as any, gap: 10 }}>
-          {unidades.map((u: any) => {
-            const vinculados = ests.filter((e: any) => e.unidade === u.nome);
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {unidades.map(u => {
+            const vinculados = ests.filter(e => e.unidade === u.nome);
             return (
               <div key={u.id} style={darkCard({ padding: "14px 16px" })}>
                 {editando === u.id ? (
-                  <div style={{ display: "flex", flexDirection: "column" as any, gap: 8 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     <input value={formEdit.nome} onChange={e => setFormEdit({ ...formEdit, nome: e.target.value })} style={darkInp} />
                     <input value={formEdit.cidade} onChange={e => setFormEdit({ ...formEdit, cidade: e.target.value })} style={darkInp} />
                     <div style={{ display: "flex", gap: 8 }}><button onClick={() => salvarEdit(u.id)} style={yellowBtn()}>Salvar</button><button onClick={() => setEditando(null)} style={ghostBtn()}>Cancelar</button></div>
@@ -113,7 +111,7 @@ const GerenciarUnidades = ({ unidades, setUnidades, ests, onClose }: any) => {
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>Smart Fit {u.nome}</div>
                       <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{u.cidade} · {vinculados.length} estagiário(s)</div>
-                      {vinculados.length > 0 && <div style={{ display: "flex", flexWrap: "wrap" as any, gap: 4, marginTop: 6 }}>{vinculados.map((e: any) => <span key={e.id} style={{ fontSize: 10, background: "rgba(255,215,0,0.1)", color: SF_YELLOW, borderRadius: 4, padding: "2px 8px" }}>{e.nome}</span>)}</div>}
+                      {vinculados.length > 0 && <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 6 }}>{vinculados.map(e => <span key={e.id} style={{ fontSize: 10, background: "rgba(255,215,0,0.1)", color: SF_YELLOW, borderRadius: 4, padding: "2px 8px" }}>{e.nome}</span>)}</div>}
                     </div>
                     <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
                       <button onClick={() => iniciarEdit(u)} style={ghostBtn({ fontSize: 11, padding: "5px 10px" })}>✏️ Editar</button>
@@ -130,15 +128,15 @@ const GerenciarUnidades = ({ unidades, setUnidades, ests, onClose }: any) => {
   );
 };
 
-const PDFReport = ({ ests, onClose }: any) => {
-  const printRef = useRef<any>();
+const PDFReport = ({ ests, onClose }) => {
+  const printRef = useRef();
   const isMobile = useIsMobile();
-  const handlePrint = () => { const c = printRef.current.innerHTML; const w = window.open("", "_blank") as any; w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Relatório — Smart Fit</title><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#fff;color:#1a1a1a;font-size:11px;}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>${c}</body></html>`); w.document.close(); setTimeout(() => w.print(), 400); };
+  const handlePrint = () => { const c = printRef.current.innerHTML; const w = window.open("", "_blank"); w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Relatório — Smart Fit</title><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#fff;color:#1a1a1a;font-size:11px;}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>${c}</body></html>`); w.document.close(); setTimeout(() => w.print(), 400); };
   const hoje = new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
-  const totalFbs = ests.flatMap((e: any) => e.feedbacks.map((f: any) => f.nota));
-  const mediaGeral = totalFbs.length ? (totalFbs.reduce((a: number, b: number) => a + b, 0) / totalFbs.length).toFixed(1) : "—";
-  const presTotal = ests.flatMap((e: any) => e.presencas);
-  const presRate = presTotal.length ? Math.round((presTotal.filter((p: any) => p.presente).length / presTotal.length) * 100) : 0;
+  const totalFbs = ests.flatMap(e => e.feedbacks.map(f => f.nota));
+  const mediaGeral = totalFbs.length ? (totalFbs.reduce((a, b) => a + b, 0) / totalFbs.length).toFixed(1) : "—";
+  const presTotal = ests.flatMap(e => e.presencas);
+  const presRate = presTotal.length ? Math.round((presTotal.filter(p => p.presente).length / presTotal.length) * 100) : 0;
   return (
     <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", overflow: "auto" }}>
       <div style={{ position: "sticky", top: 0, zIndex: 10, background: SF_BLACK, borderBottom: `2px solid ${SF_YELLOW}`, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "10px 12px" : "12px 24px" }}>
@@ -155,7 +153,7 @@ const PDFReport = ({ ests, onClose }: any) => {
             <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", lineHeight: 2.2 }}>
               <div>Emitido em: <strong style={{ color: "rgba(255,255,255,0.7)" }}>{hoje}</strong></div>
               <div>Total de estagiários: <strong style={{ color: "rgba(255,255,255,0.7)" }}>{ests.length}</strong></div>
-              <div>Unidades: <strong style={{ color: "rgba(255,255,255,0.7)" }}>{[...new Set(ests.map((e: any) => e.unidade))].join(", ")}</strong></div>
+              <div>Unidades: <strong style={{ color: "rgba(255,255,255,0.7)" }}>{[...new Set(ests.map(e => e.unidade))].join(", ")}</strong></div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(255,215,0,0.25)", paddingTop: 16, fontSize: 10, color: "rgba(255,255,255,0.3)" }}>Documento confidencial · Uso interno · Grupo Smart Fit</div>
@@ -163,21 +161,21 @@ const PDFReport = ({ ests, onClose }: any) => {
         <div style={{ padding: isMobile ? "20px 16px" : "32px 40px" }}>
           <div style={{ fontSize: 9, letterSpacing: 2, color: SF_YELLOW, fontWeight: 700, marginBottom: 6, background: "#1a1a1a", padding: "6px 12px", borderRadius: 4 }}>SUMÁRIO EXECUTIVO</div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: isMobile ? 8 : 10, marginBottom: 24 }}>
-            {[["ESTAGIÁRIOS", ests.length, "#185FA5"], ["MÉDIA FEEDBACKS", mediaGeral, "#F5A800"], ["TAXA PRESENÇA", `${presRate}%`, "#3B6D11"], ["FEEDBACKS", ests.reduce((a: number, e: any) => a + e.feedbacks.length, 0), "#534AB7"]].map(([l, v, c]: any) => (
+            {[["ESTAGIÁRIOS", ests.length, "#185FA5"], ["MÉDIA FEEDBACKS", mediaGeral, "#F5A800"], ["TAXA PRESENÇA", `${presRate}%`, "#3B6D11"], ["FEEDBACKS", ests.reduce((a, e) => a + e.feedbacks.length, 0), "#534AB7"]].map(([l, v, c]) => (
               <div key={l} style={{ background: "#f8f8f8", border: "1px solid #eee", borderRadius: 8, padding: "12px 8px", textAlign: "center", borderTop: `3px solid ${c}` }}>
                 <div style={{ fontSize: isMobile ? 22 : 28, fontWeight: 900, color: c }}>{v}</div>
                 <div style={{ fontSize: 8, color: "#999", marginTop: 3, letterSpacing: 1, textTransform: "uppercase" }}>{l}</div>
               </div>
             ))}
           </div>
-          {ests.map((e: any) => {
-            const st = STATUS_CONFIG[e.status as keyof typeof STATUS_CONFIG];
+          {ests.map(e => {
+            const st = STATUS_CONFIG[e.status];
             const trilhaCon = Object.values(e.trilhaStatus).flat().filter(Boolean).length;
             const trilhaTot = Object.values(e.trilhaStatus).flat().length;
-            const presOk = e.presencas.filter((p: any) => p.presente).length;
-            const tarefasOk = e.tarefas.filter((t: any) => t.feito).length;
-            const ns = e.feedbacks.map((f: any) => f.nota);
-            const mediaFb = ns.length ? (ns.reduce((a: number, b: number) => a + b, 0) / ns.length).toFixed(1) : "—";
+            const presOk = e.presencas.filter(p => p.presente).length;
+            const tarefasOk = e.tarefas.filter(t => t.feito).length;
+            const ns = e.feedbacks.map(f => f.nota);
+            const mediaFb = ns.length ? (ns.reduce((a, b) => a + b, 0) / ns.length).toFixed(1) : "—";
             return (
               <div key={e.id} style={{ border: "1px solid #e0e0e0", borderRadius: 10, marginBottom: 20, overflow: "hidden" }}>
                 <div style={{ background: "#1a1a1a", padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 6 }}>
@@ -186,7 +184,7 @@ const PDFReport = ({ ests, onClose }: any) => {
                 </div>
                 <div style={{ padding: "14px 16px" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 12 }}>
-                    {[["Tarefas", `${tarefasOk}/${e.tarefas.length}`, tarefasOk / Math.max(e.tarefas.length, 1), "#185FA5"], ["Presenças", `${presOk}/${e.presencas.length}`, presOk / Math.max(e.presencas.length, 1), "#3B6D11"], ["Trilha", `${trilhaCon}/${trilhaTot}`, trilhaCon / Math.max(trilhaTot, 1), "#534AB7"], ["Nota", mediaFb, ns.length ? parseFloat(mediaFb) / 5 : 0, "#F5A800"]].map(([l, v, pct, c]: any) => (
+                    {[["Tarefas", `${tarefasOk}/${e.tarefas.length}`, tarefasOk / Math.max(e.tarefas.length, 1), "#185FA5"], ["Presenças", `${presOk}/${e.presencas.length}`, presOk / Math.max(e.presencas.length, 1), "#3B6D11"], ["Trilha", `${trilhaCon}/${trilhaTot}`, trilhaCon / Math.max(trilhaTot, 1), "#534AB7"], ["Nota", mediaFb, ns.length ? parseFloat(mediaFb) / 5 : 0, "#F5A800"]].map(([l, v, pct, c]) => (
                       <div key={l} style={{ background: "#f8f8f8", border: "1px solid #eee", borderRadius: 6, padding: "8px", textAlign: "center" }}>
                         <div style={{ fontSize: 18, fontWeight: 900, color: c }}>{v}</div>
                         <div style={{ fontSize: 8, color: "#aaa", textTransform: "uppercase", marginTop: 2 }}>{l}</div>
@@ -194,7 +192,7 @@ const PDFReport = ({ ests, onClose }: any) => {
                       </div>
                     ))}
                   </div>
-                  {e.feedbacks.length > 0 && e.feedbacks.map((f: any) => (
+                  {e.feedbacks.length > 0 && e.feedbacks.map(f => (
                     <div key={f.id} style={{ background: "#f9f9f9", border: "1px solid #eee", borderRadius: 6, padding: "8px 10px", marginBottom: 6 }}>
                       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}><span style={{ fontSize: 10, fontWeight: 700 }}>{f.autor}</span><span style={{ color: "#F5A800", fontSize: 11 }}>{"★".repeat(f.nota)}{"☆".repeat(5 - f.nota)}</span></div>
                       <div style={{ fontSize: 10, color: "#555" }}>{f.texto}</div>
@@ -221,17 +219,17 @@ const PDFReport = ({ ests, onClose }: any) => {
 };
 
 export default function App() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState(null);
   const [loginInput, setLoginInput] = useState({ login: "", senha: "" });
   const [loginErr, setLoginErr] = useState("");
-  const [ests, setEsts] = useState<any[]>(initialEstagiarios);
-  const [unidades, setUnidades] = useState<any[]>(initialUnidades);
-  const [sel, setSel] = useState<number | null>(null);
+  const [ests, setEsts] = useState(initialEstagiarios);
+  const [unidades, setUnidades] = useState(initialUnidades);
+  const [sel, setSel] = useState(null);
   const [aba, setAba] = useState("Tarefas");
   const [view, setView] = useState("home");
   const [showPDF, setShowPDF] = useState(false);
   const [showUnidades, setShowUnidades] = useState(false);
-  const [moduloAberto, setModuloAberto] = useState<number | null>(null);
+  const [moduloAberto, setModuloAberto] = useState(null);
   const [filtros, setFiltros] = useState({ unidade: "Todas", periodo: "Todos", status: "Todos" });
   const [formNovo, setFormNovo] = useState({ nome: "", unidadeId: "", periodo: "2025.1", status: "Em andamento" });
   const [formFb, setFormFb] = useState({ autor: "", cargo: "Líder da Unidade", nota: 5, texto: "" });
@@ -249,7 +247,7 @@ export default function App() {
   const [novaUnidadeTransf, setNovaUnidadeTransf] = useState("");
   const isMobile = useIsMobile();
 
-  const upd = (id: number, fn: any) => setEsts(p => p.map(e => e.id === id ? fn(e) : e));
+  const upd = (id, fn) => setEsts(p => p.map(e => e.id === id ? fn(e) : e));
   const est = sel !== null ? ests.find(e => e.id === sel) : null;
   const canEdit = user?.role !== "estagiario";
   const isMyProfile = user?.role === "estagiario" && est?.id === user.estId;
@@ -302,7 +300,7 @@ export default function App() {
             </div>
             <div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 4, fontWeight: 700, letterSpacing: 1 }}>PERÍODO</div><input value={formNovo.periodo} onChange={e => setFormNovo({ ...formNovo, periodo: e.target.value })} placeholder="Ex: 2025.1" style={darkInp} /></div>
             <div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 4, fontWeight: 700, letterSpacing: 1 }}>STATUS</div><select value={formNovo.status} onChange={e => setFormNovo({ ...formNovo, status: e.target.value })} style={darkInp}><option>Em andamento</option><option>Atenção</option><option>Concluído</option></select></div>
-            <button onClick={() => { if (!formNovo.nome.trim() || !formNovo.unidadeId) return; const u = unidades.find(u => u.id === parseInt(formNovo.unidadeId)); if (!u) return; const novo = { id: Date.now(), nome: formNovo.nome, unidade: u.nome, cidade: u.cidade, periodo: formNovo.periodo, status: formNovo.status, initials: formNovo.nome.split(" ").slice(0, 2).map((w: string) => w[0]).join("").toUpperCase(), tarefas: [], evolucao: { abordagens: { valor: 0, meta: 60 }, correcoes: { valor: 0, meta: 40 }, modulos: { valor: 0, meta: 4 } }, trilhaStatus: { 0: [false, false, false], 1: [false, false], 2: [false, false, false], 3: [false, false, false] }, presencas: [], feedbacks: [], satisfacao: { lider: { respondido: false }, estagiario: { respondido: false } } }; setEsts(p => [...p, novo]); setFormNovo({ nome: "", unidadeId: "", periodo: "2025.1", status: "Em andamento" }); setView("home"); }} style={{ ...yellowBtn(), padding: "10px", fontSize: 14, marginTop: 4 }}>Cadastrar estagiário</button>
+            <button onClick={() => { if (!formNovo.nome.trim() || !formNovo.unidadeId) return; const u = unidades.find(u => u.id === parseInt(formNovo.unidadeId)); if (!u) return; const novo = { id: Date.now(), nome: formNovo.nome, unidade: u.nome, cidade: u.cidade, periodo: formNovo.periodo, status: formNovo.status, initials: formNovo.nome.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase(), tarefas: [], evolucao: { abordagens: { valor: 0, meta: 60 }, correcoes: { valor: 0, meta: 40 }, modulos: { valor: 0, meta: 4 } }, trilhaStatus: { 0: [false, false, false], 1: [false, false], 2: [false, false, false], 3: [false, false, false] }, presencas: [], feedbacks: [], satisfacao: { lider: { respondido: false }, estagiario: { respondido: false } } }; setEsts(p => [...p, novo]); setFormNovo({ nome: "", unidadeId: "", periodo: "2025.1", status: "Em andamento" }); setView("home"); }} style={{ ...yellowBtn(), padding: "10px", fontSize: 14, marginTop: 4 }}>Cadastrar estagiário</button>
           </div>
         </div>
       </div>
@@ -311,12 +309,12 @@ export default function App() {
 
   if (view === "detail" && est) {
     const av = colorFor(est.initials);
-    const st = STATUS_CONFIG[est.status as keyof typeof STATUS_CONFIG];
+    const st = STATUS_CONFIG[est.status];
     return (
       <div style={{ background: SF_BLACK, minHeight: 500, ...sf, padding: isMobile ? "0.75rem" : "1rem" }}>
         {confirmDelEst && <ConfirmModal msg={`Excluir "${est.nome}" permanentemente? Esta ação não pode ser desfeita.`} onConfirm={excluirEstagiario} onCancel={() => setConfirmDelEst(false)} />}
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14, flexWrap: "wrap" as any }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
             <button onClick={() => { setView("home"); setAba("Tarefas"); setSel(null); }} style={ghostBtn({ fontSize: 12, padding: "5px 10px" })}>← Voltar</button>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: av.bg, border: `2px solid ${av.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: av.color, flexShrink: 0 }}>{est.initials}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -327,7 +325,7 @@ export default function App() {
           </div>
 
           {user.role === "admin" && (
-            <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" as any }}>
+            <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
               <button onClick={() => { setShowTransferir(!showTransferir); setNovaUnidadeTransf(""); }} style={ghostBtn({ fontSize: 12, padding: "5px 12px" })}>🔀 Transferir unidade</button>
               <button onClick={() => setConfirmDelEst(true)} style={redBtn({ fontSize: 12, padding: "5px 12px" })}>🗑 Excluir estagiário</button>
             </div>
@@ -337,7 +335,7 @@ export default function App() {
             <div style={{ ...darkCard({ marginBottom: 14 }), border: "0.5px solid rgba(255,215,0,0.3)" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: SF_YELLOW, marginBottom: 10 }}>🔀 Transferir para outra unidade</div>
               <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginBottom: 8 }}>Unidade atual: <strong style={{ color: "#fff" }}>Smart Fit {est.unidade}</strong></div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as any }}>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <select value={novaUnidadeTransf} onChange={e => setNovaUnidadeTransf(e.target.value)} style={{ ...darkInp, flex: 1 }}>
                   <option value="">Selecione a nova unidade...</option>
                   {unidades.filter(u => u.nome !== est.unidade).map(u => <option key={u.id} value={u.id}>{u.nome} — {u.cidade}</option>)}
@@ -358,10 +356,10 @@ export default function App() {
                 <span style={{ fontSize: 14, fontWeight: 700, color: SF_YELLOW }}>Tarefas e atividades</span>
                 {(canEdit || isMyProfile) && <button onClick={() => setShowTF(!showTF)} style={ghostBtn()}>+ Nova</button>}
               </div>
-              {showTF && <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" as any }}><input value={novaTarefa} onChange={e => setNovaTarefa(e.target.value)} placeholder="Descreva a tarefa..." style={{ ...darkInp, flex: 1 }} /><button onClick={() => { if (!novaTarefa.trim()) return; upd(est.id, e => ({ ...e, tarefas: [...e.tarefas, { id: Date.now(), texto: novaTarefa.trim(), feito: false }] })); setNovaTarefa(""); setShowTF(false); }} style={yellowBtn()}>OK</button></div>}
+              {showTF && <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}><input value={novaTarefa} onChange={e => setNovaTarefa(e.target.value)} placeholder="Descreva a tarefa..." style={{ ...darkInp, flex: 1 }} /><button onClick={() => { if (!novaTarefa.trim()) return; upd(est.id, e => ({ ...e, tarefas: [...e.tarefas, { id: Date.now(), texto: novaTarefa.trim(), feito: false }] })); setNovaTarefa(""); setShowTF(false); }} style={yellowBtn()}>OK</button></div>}
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {est.tarefas.map((t: any) => (
-                  <div key={t.id} onClick={() => (canEdit || isMyProfile) && upd(est.id, e => ({ ...e, tarefas: e.tarefas.map((x: any) => x.id === t.id ? { ...x, feito: !x.feito } : x) }))} style={{ display: "flex", alignItems: "center", gap: 10, cursor: (canEdit || isMyProfile) ? "pointer" : "default", padding: "10px 12px", borderRadius: 8, background: t.feito ? "rgba(255,215,0,0.08)" : "rgba(255,255,255,0.04)", border: `0.5px solid ${t.feito ? "rgba(255,215,0,0.3)" : "rgba(255,255,255,0.08)"}` }}>
+                {est.tarefas.map(t => (
+                  <div key={t.id} onClick={() => (canEdit || isMyProfile) && upd(est.id, e => ({ ...e, tarefas: e.tarefas.map(x => x.id === t.id ? { ...x, feito: !x.feito } : x) }))} style={{ display: "flex", alignItems: "center", gap: 10, cursor: (canEdit || isMyProfile) ? "pointer" : "default", padding: "10px 12px", borderRadius: 8, background: t.feito ? "rgba(255,215,0,0.08)" : "rgba(255,255,255,0.04)", border: `0.5px solid ${t.feito ? "rgba(255,215,0,0.3)" : "rgba(255,255,255,0.08)"}` }}>
                     <div style={{ width: 18, height: 18, borderRadius: 4, border: `2px solid ${t.feito ? SF_YELLOW : "rgba(255,255,255,0.3)"}`, background: t.feito ? SF_YELLOW : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{t.feito && <span style={{ color: SF_BLACK, fontSize: 11, fontWeight: 900 }}>✓</span>}</div>
                     <span style={{ fontSize: 13, color: t.feito ? SF_YELLOW : "rgba(255,255,255,0.8)", textDecoration: t.feito ? "line-through" : "none" }}>{t.texto}</span>
                   </div>
@@ -380,7 +378,7 @@ export default function App() {
               </div>
               {canEdit && <div style={{ borderTop: "0.5px solid rgba(255,215,0,0.15)", paddingTop: 16 }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: 1, marginBottom: 10 }}>ATUALIZAR REGISTROS</div>
-                {[["abordagens", "Abordagens proativas", 60], ["correcoes", "Correções de movimento", 40], ["modulos", "Módulos concluídos", 4]].map(([k, label, meta]: any) => (
+                {[["abordagens", "Abordagens proativas", 60], ["correcoes", "Correções de movimento", 40], ["modulos", "Módulos concluídos", 4]].map(([k, label, meta]) => (
                   <div key={k} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
                     <span style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", flex: 1 }}>{label}</span>
                     <button onClick={() => upd(est.id, e => ({ ...e, evolucao: { ...e.evolucao, [k]: { ...e.evolucao[k], valor: Math.max(0, e.evolucao[k].valor - 1) } } }))} style={{ ...ghostBtn(), padding: "4px 14px", fontSize: 18 }}>−</button>
@@ -409,7 +407,7 @@ export default function App() {
                       </div>
                       {aberto && <div style={{ padding: "10px 14px 12px", display: "flex", flexDirection: "column", gap: 8, background: "rgba(0,0,0,0.2)" }}>
                         {m.temas.map((tema, ti) => (
-                          <div key={ti} onClick={() => { if (!canEdit && !isMyProfile) return; upd(est.id, e => { const ts = { ...e.trilhaStatus }; const arr = [...(ts[mi] || [])]; arr[ti] = !arr[ti]; const modConcl = Object.entries({ ...ts, [mi]: arr }).filter(([, v]: any) => v.every(Boolean)).length; return { ...e, trilhaStatus: { ...ts, [mi]: arr }, evolucao: { ...e.evolucao, modulos: { ...e.evolucao.modulos, valor: modConcl } } }; }); }} style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: (canEdit || isMyProfile) ? "pointer" : "default", padding: "8px 10px", borderRadius: 8, background: temas[ti] ? "rgba(255,215,0,0.07)" : "rgba(255,255,255,0.03)", border: `0.5px solid ${temas[ti] ? "rgba(255,215,0,0.2)" : "rgba(255,255,255,0.06)"}` }}>
+                          <div key={ti} onClick={() => { if (!canEdit && !isMyProfile) return; upd(est.id, e => { const ts = { ...e.trilhaStatus }; const arr = [...(ts[mi] || [])]; arr[ti] = !arr[ti]; const modConcl = Object.entries({ ...ts, [mi]: arr }).filter(([, v]) => v.every(Boolean)).length; return { ...e, trilhaStatus: { ...ts, [mi]: arr }, evolucao: { ...e.evolucao, modulos: { ...e.evolucao.modulos, valor: modConcl } } }; }); }} style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: (canEdit || isMyProfile) ? "pointer" : "default", padding: "8px 10px", borderRadius: 8, background: temas[ti] ? "rgba(255,215,0,0.07)" : "rgba(255,255,255,0.03)", border: `0.5px solid ${temas[ti] ? "rgba(255,215,0,0.2)" : "rgba(255,255,255,0.06)"}` }}>
                             <div style={{ width: 16, height: 16, borderRadius: 3, border: `2px solid ${temas[ti] ? SF_YELLOW : "rgba(255,255,255,0.2)"}`, background: temas[ti] ? SF_YELLOW : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>{temas[ti] && <span style={{ color: SF_BLACK, fontSize: 10, fontWeight: 900 }}>✓</span>}</div>
                             <span style={{ fontSize: 12, color: temas[ti] ? SF_YELLOW : "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>{tema}</span>
                           </div>
@@ -436,7 +434,7 @@ export default function App() {
                 <button onClick={() => { if (!novaP.evento || !novaP.data) return; upd(est.id, e => ({ ...e, presencas: [...e.presencas, { ...novaP, id: Date.now() }] })); setNovaP({ evento: "", data: "", presente: true, comentario: "" }); setShowPF(false); }} style={yellowBtn()}>Salvar</button>
               </div>}
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {est.presencas.map((p: any) => (
+                {est.presencas.map(p => (
                   <div key={p.id} style={{ padding: "10px 12px", borderRadius: 8, background: p.presente ? "rgba(144,238,144,0.08)" : "rgba(255,100,100,0.08)", border: `0.5px solid ${p.presente ? "rgba(144,238,144,0.3)" : "rgba(255,100,100,0.3)"}` }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <span style={{ fontSize: 14, color: p.presente ? "#90EE90" : "#FF8080" }}>{p.presente ? "✓" : "✗"}</span>
@@ -459,12 +457,12 @@ export default function App() {
               {showFbForm && <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14, padding: "12px", background: "rgba(255,255,255,0.04)", borderRadius: 8 }}>
                 <input value={formFb.autor} onChange={e => setFormFb({ ...formFb, autor: e.target.value })} placeholder="Seu nome" style={darkInp} />
                 <select value={formFb.cargo} onChange={e => setFormFb({ ...formFb, cargo: e.target.value })} style={darkInp}><option>Líder da Unidade</option><option>Parceiro — Prof. Musculação</option><option>Parceiro — Recepcionista</option></select>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}><span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Nota:</span><Stars nota={formFb.nota} onChange={(n: number) => setFormFb({ ...formFb, nota: n })} /></div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}><span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Nota:</span><Stars nota={formFb.nota} onChange={n => setFormFb({ ...formFb, nota: n })} /></div>
                 <textarea value={formFb.texto} onChange={e => setFormFb({ ...formFb, texto: e.target.value })} placeholder="Escreva o feedback..." rows={3} style={{ ...darkInp, resize: "vertical" }} />
                 <button onClick={() => { if (!formFb.autor || !formFb.texto) return; upd(est.id, e => ({ ...e, feedbacks: [...e.feedbacks, { ...formFb, id: Date.now(), data: new Date().toLocaleDateString("pt-BR") }] })); setFormFb({ autor: "", cargo: "Líder da Unidade", nota: 5, texto: "" }); setShowFbForm(false); }} style={yellowBtn()}>Salvar feedback</button>
               </div>}
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                {est.feedbacks.map((f: any) => (
+                {est.feedbacks.map(f => (
                   <div key={f.id} style={{ padding: "12px", borderRadius: 8, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,215,0,0.1)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8, flexWrap: "wrap", gap: 6 }}>
                       <div><span style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>{f.autor}</span><span style={{ fontSize: 11, color: SF_YELLOW, marginLeft: 8, background: "rgba(255,215,0,0.1)", borderRadius: 4, padding: "1px 6px" }}>{f.cargo}</span></div>
@@ -479,7 +477,7 @@ export default function App() {
 
           {aba === "Satisfação" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              {[{ key: "lider", titulo: "Avaliação do líder", sub: "Como o líder avalia o estagiário", showS: showLiderForm, setShowS: setShowLiderForm, form: formLider, setForm: setFormLider, submit: () => { upd(est.id, e => ({ ...e, satisfacao: { ...e.satisfacao, lider: { respondido: true, ...formLider } } })); setShowLiderForm(false); }, canAnswer: canEdit, pL: "Pontos positivos", pM: "Pontos de melhoria" }, { key: "estagiario", titulo: "Avaliação do estagiário", sub: "O que o estagiário achou do programa", showS: showEstForm, setShowS: setShowEstForm, form: formEst, setForm: setFormEst, submit: () => { upd(est.id, e => ({ ...e, satisfacao: { ...e.satisfacao, estagiario: { respondido: true, ...formEst } } })); setShowEstForm(false); }, canAnswer: isMyProfile || canEdit, pL: "O que mais gostou?", pM: "Sugestões de melhoria" }].map(({ key, titulo, sub, showS, setShowS, form, setForm, submit, canAnswer, pL, pM }: any) => {
+              {[{ key: "lider", titulo: "Avaliação do líder", sub: "Como o líder avalia o estagiário", showS: showLiderForm, setShowS: setShowLiderForm, form: formLider, setForm: setFormLider, submit: () => { upd(est.id, e => ({ ...e, satisfacao: { ...e.satisfacao, lider: { respondido: true, ...formLider } } })); setShowLiderForm(false); }, canAnswer: canEdit, pL: "Pontos positivos", pM: "Pontos de melhoria" }, { key: "estagiario", titulo: "Avaliação do estagiário", sub: "O que o estagiário achou do programa", showS: showEstForm, setShowS: setShowEstForm, form: formEst, setForm: setFormEst, submit: () => { upd(est.id, e => ({ ...e, satisfacao: { ...e.satisfacao, estagiario: { respondido: true, ...formEst } } })); setShowEstForm(false); }, canAnswer: isMyProfile || canEdit, pL: "O que mais gostou?", pM: "Sugestões de melhoria" }].map(({ key, titulo, sub, showS, setShowS, form, setForm, submit, canAnswer, pL, pM }) => {
                 const data = est.satisfacao[key];
                 return (
                   <div key={key} style={darkCard()}>
@@ -500,7 +498,7 @@ export default function App() {
                       </div>
                     ) : showS && canAnswer ? (
                       <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: "12px", background: "rgba(255,255,255,0.04)", borderRadius: 8 }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}><span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Nota:</span><Stars nota={form.nota} onChange={(n: number) => setForm({ ...form, nota: n })} /></div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}><span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Nota:</span><Stars nota={form.nota} onChange={n => setForm({ ...form, nota: n })} /></div>
                         <textarea value={form.pontos} onChange={e => setForm({ ...form, pontos: e.target.value })} placeholder={pL} rows={2} style={{ ...darkInp, resize: "vertical" }} />
                         <textarea value={form.melhoria} onChange={e => setForm({ ...form, melhoria: e.target.value })} placeholder={pM} rows={2} style={{ ...darkInp, resize: "vertical" }} />
                         <button onClick={submit} style={yellowBtn()}>Enviar avaliação</button>
@@ -516,7 +514,7 @@ export default function App() {
     );
   }
 
-  const roleLabel = user.role === "admin" ? "Administrador" : user.role === "lider" ? `Líder · ${user.unidade}` : `Estagiário`;
+  const roleLabel = user.role === "admin" ? "Administrador" : user.role === "lider" ? `Líder · ${user.unidade}` : "Estagiário";
   return (
     <div style={{ background: SF_BLACK, minHeight: 500, ...sf }}>
       <div style={{ background: SF_DARK_GRAY, borderBottom: `2px solid ${SF_YELLOW}`, padding: isMobile ? "10px 12px" : "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
@@ -526,15 +524,14 @@ export default function App() {
           <button onClick={doLogout} style={{ ...ghostBtn(), fontSize: 11, padding: "4px 8px" }}>Sair</button>
         </div>
       </div>
-
       <div style={{ maxWidth: 680, margin: "0 auto", padding: isMobile ? "0.75rem" : "1rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "center", marginBottom: 14, gap: 10, flexWrap: "wrap" as any }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "center", marginBottom: 14, gap: 10, flexWrap: "wrap" }}>
           <div>
             <div style={{ fontSize: 10, color: SF_YELLOW, fontWeight: 700, letterSpacing: 2 }}>PROGRAMA DE ESTÁGIO</div>
             <div style={{ fontSize: isMobile ? 15 : 18, fontWeight: 700, color: "#fff" }}>Acompanhamento de Estagiários</div>
           </div>
           {user.role === "admin" && (
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as any }}>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <button onClick={() => setShowPDF(true)} style={{ ...ghostBtn(), border: `1px solid ${SF_YELLOW}`, color: SF_YELLOW, fontSize: isMobile ? 11 : 13, padding: isMobile ? "6px 10px" : "6px 14px" }}>📄 {isMobile ? "PDF" : "Relatório PDF"}</button>
               <button onClick={() => setShowUnidades(true)} style={{ ...ghostBtn(), fontSize: isMobile ? 11 : 13, padding: isMobile ? "6px 10px" : "6px 14px" }}>🏢 {isMobile ? "Unidades" : "Gerenciar Unidades"}</button>
               <button onClick={() => setView("novoEst")} style={{ ...yellowBtn(), fontSize: isMobile ? 11 : 13, padding: isMobile ? "6px 12px" : "8px 18px" }}>+ {isMobile ? "Novo" : "Novo Estagiário"}</button>
@@ -544,36 +541,33 @@ export default function App() {
             <button onClick={() => setShowPDF(true)} style={{ ...ghostBtn(), border: `1px solid ${SF_YELLOW}`, color: SF_YELLOW, fontSize: isMobile ? 11 : 13 }}>📄 {isMobile ? "PDF" : "Relatório PDF"}</button>
           )}
         </div>
-
         {canEdit && (
-          <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" as any }}>
-            {[["Unidade", "unidade", ["Todas", ...unidadesFiltro]], ["Período", "periodo", ["Todos", ...[...new Set(ests.map(e => e.periodo))]]], ["Status", "status", ["Todos", "Em andamento", "Atenção", "Concluído"]]].map(([label, key, opts]: any) => (
+          <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
+            {[["Unidade", "unidade", ["Todas", ...unidadesFiltro]], ["Período", "periodo", ["Todos", ...[...new Set(ests.map(e => e.periodo))]]], ["Status", "status", ["Todos", "Em andamento", "Atenção", "Concluído"]]].map(([label, key, opts]) => (
               <div key={key} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", fontWeight: 700, letterSpacing: 1 }}>{label.toUpperCase()}</div>
-                <select value={(filtros as any)[key]} onChange={e => setFiltros({ ...filtros, [key]: e.target.value })} style={{ ...darkInp, width: "auto", padding: "5px 8px", fontSize: 12 }}>
-                  {opts.map((o: string) => <option key={o}>{o}</option>)}
+                <select value={filtros[key]} onChange={e => setFiltros({ ...filtros, [key]: e.target.value })} style={{ ...darkInp, width: "auto", padding: "5px 8px", fontSize: 12 }}>
+                  {opts.map(o => <option key={o}>{o}</option>)}
                 </select>
               </div>
             ))}
           </div>
         )}
-
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: isMobile ? 6 : 8, marginBottom: 14 }}>
-          {[["TOTAL", filtrados.length, SF_YELLOW], ["ANDAMENTO", filtrados.filter(e => e.status === "Em andamento").length, "#60BFFF"], ["ATENÇÃO", filtrados.filter(e => e.status === "Atenção").length, "#FFD700"], ["CONCLUÍDOS", filtrados.filter(e => e.status === "Concluído").length, "#90EE90"]].map(([l, v, c]: any) => (
+          {[["TOTAL", filtrados.length, SF_YELLOW], ["ANDAMENTO", filtrados.filter(e => e.status === "Em andamento").length, "#60BFFF"], ["ATENÇÃO", filtrados.filter(e => e.status === "Atenção").length, "#FFD700"], ["CONCLUÍDOS", filtrados.filter(e => e.status === "Concluído").length, "#90EE90"]].map(([l, v, c]) => (
             <div key={l} style={{ background: SF_DARK_GRAY, border: `1px solid ${c}25`, borderRadius: 10, padding: isMobile ? "8px 4px" : "12px 8px", textAlign: "center" }}>
               <div style={{ fontSize: isMobile ? 18 : 22, fontWeight: 900, color: c }}>{v}</div>
               <div style={{ fontSize: isMobile ? 8 : 9, color: "rgba(255,255,255,0.4)", marginTop: 2, letterSpacing: 1 }}>{l}</div>
             </div>
           ))}
         </div>
-
         <div style={{ display: "grid", gap: 10 }}>
           {filtrados.map(e => {
-            const av = colorFor(e.initials); const st = STATUS_CONFIG[e.status as keyof typeof STATUS_CONFIG];
-            const tarefasOk = e.tarefas.filter((t: any) => t.feito).length;
+            const av = colorFor(e.initials); const st = STATUS_CONFIG[e.status];
+            const tarefasOk = e.tarefas.filter(t => t.feito).length;
             const trilhaCon = Object.values(e.trilhaStatus).flat().filter(Boolean).length;
             const trilhaTot = Object.values(e.trilhaStatus).flat().length;
-            const pres = e.presencas.filter((p: any) => p.presente).length;
+            const pres = e.presencas.filter(p => p.presente).length;
             const abPct = Math.min(100, Math.round((e.evolucao.abordagens.valor / e.evolucao.abordagens.meta) * 100));
             return (
               <div key={e.id} onClick={() => { setSel(e.id); setView("detail"); setAba("Tarefas"); }} style={{ background: SF_DARK_GRAY, border: "0.5px solid rgba(255,215,0,0.15)", borderRadius: 12, padding: isMobile ? "12px" : "14px 16px", cursor: "pointer" }}>
@@ -586,7 +580,7 @@ export default function App() {
                   <span style={{ fontSize: 10, padding: "3px 8px", borderRadius: 6, background: st.bg, color: st.color, fontWeight: 700, flexShrink: 0 }}>{isMobile ? e.status.split(" ")[0] : e.status}</span>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: isMobile ? 5 : 8 }}>
-                  {[["Tarefas", `${tarefasOk}/${e.tarefas.length}`, e.tarefas.length ? Math.round((tarefasOk / e.tarefas.length) * 100) : 0, SF_YELLOW], ["Trilha", `${trilhaCon}/${trilhaTot}`, Math.round((trilhaCon / trilhaTot) * 100), "#60BFFF"], ["Presenças", `${pres}/${e.presencas.length}`, e.presencas.length ? Math.round((pres / e.presencas.length) * 100) : 0, "#90EE90"], ["Abordagens", `${e.evolucao.abordagens.valor}/${e.evolucao.abordagens.meta}`, abPct, "#FF80C0"]].map(([l, v, pct, c]: any) => (
+                  {[["Tarefas", `${tarefasOk}/${e.tarefas.length}`, e.tarefas.length ? Math.round((tarefasOk / e.tarefas.length) * 100) : 0, SF_YELLOW], ["Trilha", `${trilhaCon}/${trilhaTot}`, Math.round((trilhaCon / trilhaTot) * 100), "#60BFFF"], ["Presenças", `${pres}/${e.presencas.length}`, e.presencas.length ? Math.round((pres / e.presencas.length) * 100) : 0, "#90EE90"], ["Abordagens", `${e.evolucao.abordagens.valor}/${e.evolucao.abordagens.meta}`, abPct, "#FF80C0"]].map(([l, v, pct, c]) => (
                     <div key={l} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: isMobile ? "6px 4px" : "8px 10px", textAlign: "center", border: `0.5px solid ${c}25` }}>
                       <div style={{ fontSize: isMobile ? 11 : 13, fontWeight: 700, color: c }}>{v}</div>
                       <div style={{ fontSize: isMobile ? 8 : 10, color: "rgba(255,255,255,0.4)", marginTop: 1 }}>{l}</div>
